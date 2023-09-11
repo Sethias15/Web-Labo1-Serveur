@@ -1,0 +1,32 @@
+[
+    {
+        "Id": 1,
+        "Titre": "Collège Lionel-Groulx",
+        "Url": "https://clg.qc.ca/",
+        "Categorie": "Cegep"
+    },
+    {
+        "Id": 2,
+        "Titre": "Collège Monmorency",
+        "Url": "https://www.cmontmorency.qc.ca/",
+        "Categorie": "Cegep"
+    },
+    {
+        "Id": 3,
+        "Titre": "Glitch",
+        "Url": "https://glitch.com/",
+        "Categorie": "Cloud"
+    },
+    {
+        "Id": 4,
+        "Titre": "Github",
+        "Url": "https://github.com/",
+        "Categorie": "Cloud"
+    },
+    {
+        "Id": 5,
+        "Titre": "Google",
+        "Url": "https://www.google.ca/",
+        "Categorie": "Moteur de recherche"
+    }
+]

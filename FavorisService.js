@@ -25,24 +25,24 @@ function response(res, status, data = null) {
     res.end(data);
     return true;
 }
-async function handleContactsRequest(req, res) {
-    let contactsRepository = new Repository("./contacts.json");
-    let contact = null;
-    if (req.url == "/api/contacts") {
+async function handleFavorisRequest(req, res) {
+    let favorisRepository = new Repository("./favoris.json");
+    let favoris = null;
+    if (req.url == "/api/favoris") {
         switch (req.method) {
             case "GET":
-                return response(res, 200, JSON.stringify(contactsRepository.getAll()));
+                return response(res, 200, JSON.stringify(favorisRepository.getAll()));
             case "POST":
-                contact = await getPayload(req, res);
-                if (contact != null) {
-                    contact = contactsRepository.add(contact);
-                    return response(res, 201, JSON.stringify(contact));
+                favoris = await getPayload(req, res);
+                if (favoris != null) {
+                    favoris = favorisRepository.add(favoris);
+                    return response(res, 201, JSON.stringify(favoris));
                 } else
                     return response(res, 400);
             case "PUT":
-                contact = await getPayload(req, res);
-                if (contact != null)
-                    if (contactsRepository.update(contact))
+                favoris = await getPayload(req, res);
+                if (favoris != null)
+                    if (favorisRepository.update(favoris))
                         return response(res, 204);
                     else
                         return response(res, 404);
@@ -50,17 +50,17 @@ async function handleContactsRequest(req, res) {
                     return response(res, 400);
         }
     } else {
-        if (req.url.includes("/api/contacts/")) {
+        if (req.url.includes("/api/favoris/")) {
             let id = parseInt(req.url.substring(req.url.lastIndexOf("/") + 1, req.url.length));
             switch (req.method) {
                 case "GET":
-                    let contact = contactsRepository.get(id);
-                    if (contact !== null)
-                        return response(res, 200, JSON.stringify(contact));
+                    let favoris = favorisRepository.get(id);
+                    if (favoris !== null)
+                        return response(res, 200, JSON.stringify(favoris));
                     else
                         return response(res, 404);
                 case "DELETE":
-                    if (contactsRepository.remove(id))
+                    if (favorisRepository.remove(id))
                         return response(res, 202);
                     else
                         return response(res, 404);
@@ -91,7 +91,7 @@ const server = createServer(async (req, res) => {
     console.log(req.method);
     accessControlConfig(req, res);
     if (!CORS_Preflight(req, res))
-        if (!handleContactsRequest(req, res))
+        if (!handleFavorisRequest(req, res))
             response(res, 404);
 });
 const PORT = process.env.PORT || 5000;

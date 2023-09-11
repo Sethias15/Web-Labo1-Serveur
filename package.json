@@ -1,17 +1,17 @@
 {
-  "name": "serveur-minimale",
+  "name": "web-tp1-serveur",
   "type": "module",
   "engines": {
     "node": "16.14.2"
   },
   "version": "1.0.0",
   "description": "Serveur http minimal",
-  "main": "ContactsService.js",
+  "main": "FavorisService.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node ContactsService.js"
+    "start": "node FavorisService.js"
   },
-  "author": "Nicolas Chourot",
+  "author": "Olivier Morin",
   "license": "ISC",
   "dependencies": {
     "query-string": "^8.1.0"
