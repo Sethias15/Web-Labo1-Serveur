@@ -25,24 +25,24 @@ function response(res, status, data = null) {
     res.end(data);
     return true;
 }
-async function handleFavorisRequest(req, res) {
-    let favorisRepository = new Repository("./favoris.json");
-    let favoris = null;
-    if (req.url == "/api/favoris") {
+async function handleBookmarksRequest(req, res) {
+    let bookmarksRepository = new Repository("./bookmarks.json");
+    let bookmarks = null;
+    if (req.url == "/api/bookmarks") {
         switch (req.method) {
             case "GET":
-                return response(res, 200, JSON.stringify(favorisRepository.getAll()));
+                return response(res, 200, JSON.stringify(bookmarksRepository.getAll()));
             case "POST":
-                favoris = await getPayload(req, res);
-                if (favoris != null) {
-                    favoris = favorisRepository.add(favoris);
-                    return response(res, 201, JSON.stringify(favoris));
+                bookmarks = await getPayload(req, res);
+                if (bookmarks != null) {
+                    bookmarks = bookmarksRepository.add(bookmarks);
+                    return response(res, 201, JSON.stringify(bookmarks));
                 } else
                     return response(res, 400);
             case "PUT":
-                favoris = await getPayload(req, res);
-                if (favoris != null)
-                    if (favorisRepository.update(favoris))
+                bookmarks = await getPayload(req, res);
+                if (bookmarks != null)
+                    if (bookmarksRepository.update(bookmarks))
                         return response(res, 204);
                     else
                         return response(res, 404);
@@ -50,17 +50,17 @@ async function handleFavorisRequest(req, res) {
                     return response(res, 400);
         }
     } else {
-        if (req.url.includes("/api/favoris/")) {
+        if (req.url.includes("/api/bookmarks/")) {
             let id = parseInt(req.url.substring(req.url.lastIndexOf("/") + 1, req.url.length));
             switch (req.method) {
                 case "GET":
-                    let favoris = favorisRepository.get(id);
-                    if (favoris !== null)
-                        return response(res, 200, JSON.stringify(favoris));
+                    let bookmarks = bookmarksRepository.get(id);
+                    if (bookmarks !== null)
+                        return response(res, 200, JSON.stringify(bookmarks));
                     else
                         return response(res, 404);
                 case "DELETE":
-                    if (favorisRepository.remove(id))
+                    if (bookmarksRepository.remove(id))
                         return response(res, 202);
                     else
                         return response(res, 404);
@@ -91,7 +91,7 @@ const server = createServer(async (req, res) => {
     console.log(req.method);
     accessControlConfig(req, res);
     if (!CORS_Preflight(req, res))
-        if (!handleFavorisRequest(req, res))
+        if (!handleBookmarksRequest(req, res))
             response(res, 404);
 });
 const PORT = process.env.PORT || 5000;

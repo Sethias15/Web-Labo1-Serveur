@@ -6,10 +6,10 @@
   },
   "version": "1.0.0",
   "description": "Serveur http minimal",
-  "main": "FavorisService.js",
+  "main": "BookmarksService.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node FavorisService.js"
+    "start": "node BookmarksService.js"
   },
   "author": "Olivier Morin",
   "license": "ISC",
